@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Number Guessing Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- All styles in this file (as required) -->
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #0f4c75 0%, #1b262c 40%, #000 100%);
+      color: #f5f5f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .game-card {
+      background: rgba(10, 25, 47, 0.95);
+      border-radius: 16px;
+      padding: 24px 20px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .game-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .game-header h1 {
+      margin: 0;
+      font-size: 1.4rem;
+    }
+
+    .nav-links a {
+      color: #bbe1fa;
+      text-decoration: none;
+      font-size: 0.8rem;
+    }
+
+    .nav-links a:hover {
+      text-decoration: underline;
+    }
+
+    .range-label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+      margin-bottom: 8px;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    input[type="number"] {
+      flex: 1;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(15, 52, 96, 0.85);
+      color: #f5f5f5;
+      font-size: 1rem;
+    }
+
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #3282b8;
+      box-shadow: 0 0 0 1px #3282b8;
+    }
+
+    button {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: background 0.15s ease, transform 0.08s ease;
+    }
+
+    .btn-primary {
+      background: #00b894;
+      color: #04151f;
+    }
+
+    .btn-primary:hover {
+      background: #00e0b3;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: #1f4068;
+      color: #f5f5f5;
+    }
+
+    .btn-secondary:hover {
+      background: #32527a;
+      transform: translateY(-1px);
+    }
+
+    .status {
+      min-height: 40px;
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+    }
+
+    .status span {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+
+    .status--neutral span {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .status--low span {
+      background: rgba(46, 134, 222, 0.2);
+      border: 1px solid #2e86de;
+    }
+
+    .status--high span {
+      background: rgba(225, 112, 85, 0.2);
+      border: 1px solid #e17055;
+    }
+
+    .status--win span {
+      background: rgba(0, 184, 148, 0.25);
+      border: 1px solid #00b894;
+    }
+
+    .meta {
+      font-size: 0.8rem;
+      opacity: 0.85;
+      margin-bottom: 6px;
+    }
+
+    .guesses {
+      font-size: 0.8rem;
+      max-height: 80px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .guesses-title {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .difficulty-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.8rem;
+      opacity: 0.9;
+    }
+
+    select {
+      background: rgba(15, 52, 96, 0.85);
+      color: #f5f5f5;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 4px 8px;
+      font-size: 0.8rem;
+    }
+
+    select:focus {
+      outline: none;
+      border-color: #3282b8;
+      box-shadow: 0 0 0 1px #3282b8;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-card">
+    <div class="game-header">
+      <h1>Number Guessing Game</h1>
+      <div class="nav-links">
+        <a href="scratch.html">← Surf Page</a> ·
+        <a href="index.html">Home</a>
+      </div>
+    </div>
+
+    <p class="range-label" id="rangeLabel">I picked a number between 1 and 100. Can you guess it?</p>
+
+    <div class="difficulty-row">
+      <span>Difficulty:</span>
+      <select id="difficultySelect">
+        <option value="20">Easy (1–20)</option>
+        <option value="50">Medium (1–50)</option>
+        <option value="100">Hard (1–100)</option>
+      </select>
+    </div>
+
+    <div class="input-row">
+      <input type="number" id="guessInput" placeholder="Enter your guess" min="1">
+      <button class="btn-primary" id="guessBtn">Guess</button>
+    </div>
+
+    <div class="status status--neutral" id="status">
+      <span>Make your first guess!</span>
+    </div>
+
+    <p class="meta" id="attemptsMeta">Attempts: 0</p>
+
+    <div class="guesses">
+      <div class="guesses-title">Guess history:</div>
+      <div id="guessHistory">None yet.</div>
+    </div>
+
+    <div style="margin-top: 14px; display: flex; justify-content: space-between; gap: 8px;">
+      <button class="btn-secondary" id="resetBtn">New Number</button>
+      <button class="btn-secondary" id="hintBtn">Hint</button>
+    </div>
+  </div>
+
+  <!-- All scripts in this file (as required) -->
+  <script>
+    const guessInput = document.getElementById('guessInput');
+    const guessBtn = document.getElementById('guessBtn');
+    const statusBox = document.getElementById('status');
+    const attemptsMeta = document.getElementById('attemptsMeta');
+    const guessHistory = document.getElementById('guessHistory');
+    const resetBtn = document.getElementById('resetBtn');
+    const hintBtn = document.getElementById('hintBtn');
+    const difficultySelect = document.getElementById('difficultySelect');
+    const rangeLabel = document.getElementById('rangeLabel');
+
+    let secretNumber;
+    let attempts;
+    let maxRange;
+
+    function setStatus(message, type) {
+      statusBox.className = 'status status--' + type;
+      statusBox.innerHTML = '<span>' + message + '</span>';
+    }
+
+    function resetGame() {
+      maxRange = parseInt(difficultySelect.value, 10);
+      secretNumber = Math.floor(Math.random() * maxRange) + 1;
+      attempts = 0;
+      attemptsMeta.textContent = 'Attempts: 0';
+      guessHistory.textContent = 'None yet.';
+      guessInput.value = '';
+      guessInput.focus();
+      setStatus('New number picked. Start guessing!', 'neutral');
+      rangeLabel.textContent = 'I picked a number between 1 and ' + maxRange + '. Can you guess it?';
+    }
+
+    function addGuessToHistory(guess) {
+      if (guessHistory.textContent === 'None yet.') {
+        guessHistory.textContent = guess;
+      } else {
+        guessHistory.textContent += ', ' + guess;
+      }
+    }
+
+    function handleGuess() {
+      const value = parseInt(guessInput.value, 10);
+
+      if (isNaN(value)) {
+        setStatus('Please enter a valid number.', 'neutral');
+        return;
+      }
+
+      if (value < 1 || value > maxRange) {
+        setStatus('Guess must be between 1 and ' + maxRange + '.', 'neutral');
+        return;
+      }
+
+      attempts++;
+      attemptsMeta.textContent = 'Attempts: ' + attempts;
+      addGuessToHistory(value);
+
+      if (value < secretNumber) {
+        setStatus('Too low. Try a higher number.', 'low');
+      } else if (value > secretNumber) {
+        setStatus('Too high. Try a lower number.', 'high');
+      } else {
+        setStatus('You got it! The number was ' + secretNumber + '.', 'win');
+      }
+
+      guessInput.value = '';
+      guessInput.focus();
+    }
+
+    function giveHint() {
+      const lowerBound = Math.max(1, secretNumber - Math.floor(maxRange * 0.15));
+      const upperBound = Math.min(maxRange, secretNumber + Math.floor(maxRange * 0.15));
+      setStatus('Hint: It\'s between ' + lowerBound + ' and ' + upperBound + '.', 'neutral');
+    }
+
+    // Event listeners
+    guessBtn.addEventListener('click', handleGuess);
+    guessInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        handleGuess();
+      }
+    });
+
+    resetBtn.addEventListener('click', resetGame);
+    hintBtn.addEventListener('click', giveHint);
+    difficultySelect.addEventListener('change', resetGame);
+
+    // Initialize on load
+    resetGame();
+  </script>
+</body>
+</html>

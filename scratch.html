@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Surf Sessions – Scratch Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Custom scratch stylesheet -->
+  <link rel="stylesheet" href="css/scratch.css">
+</head>
+<body>
+  <!-- HEADER / NAV (DIV #1) -->
+  <header class="site-header">
+    <div class="header-inner">
+      <h1>Surf Sessions</h1>
+      <p class="tagline">From-stretch page for my Web Dev final – surfing edition 🌊</p>
+      <nav class="top-nav">
+        <a href="index.html">🏠 Back to Home</a>
+        <a href="#spots">📍 Favorite Surf Spots</a>
+        <a href="#video">🎥 Surf Clip</a>
+        <a href="#tableau">📊 Ocean Data</a>
+        <a href="app.html">🎮 Number Guessing Game</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT WRAPPER (DIV #2) -->
+  <main class="content-wrapper">
+    <!-- SECTION: INTRO -->
+    <section class="card-section">
+      <h2>Why Surfing?</h2>
+      <p>
+        Surfing is one of those rare things that is both chaos and calm at the same time. 
+        It’s early mornings, cold water, sketchy paddles out, and those moments where 
+        everything lines up and you forget about literally everything else.
+      </p>
+    </section>
+
+    <!-- SECTION: NESTED LIST REQUIREMENT -->
+    <section class="card-section">
+      <h2>How to Catch a Wave</h2>
+
+      <ol class="surf-steps">
+        <li>Pick your spot
+          <ul>
+            <li>Check the swell and wind</li>
+            <li>Look for a channel or easier paddle-out zone</li>
+            <li>Make sure there are no sketchy rocks where you’ll be surfing</li>
+          </ul>
+        </li>
+        <li>Paddle with intent
+          <ul>
+            <li>Start paddling early, not last second</li>
+            <li>Commit to the wave (no half-sends)</li>
+            <li>Keep your chest low and eyes forward</li>
+          </ul>
+        </li>
+        <li>Pop up and ride
+          <ul>
+            <li>Hands near your ribcage, not your shoulders</li>
+            <li>Front foot between your hands</li>
+            <li>Stay low, look where you want to go, and enjoy it</li>
+          </ul>
+        </li>
+      </ol>
+    </section>
+
+    <!-- SECTION: IMAGE REQUIREMENT -->
+    <section class="card-section" id="spots">
+      <h2>Favorite Surf Spots</h2>
+      <p>
+        A few places that always feel worth getting up early for:
+      </p>
+      <ul class="spot-list">
+        <li>San Onofre – mellow, crowded, but somehow still magic</li>
+        <li>Trestles – when it’s firing, there’s nothing like it</li>
+        <li>Rivi – perfect A frames when there is low wind</li>
+      </ul>
+
+      <!-- At least one image NOT from the Bootstrap theme -->
+      <figure class="surf-image-wrapper">
+        <!-- 
+          Replace surf-session.jpg with your actual image file in /img, e.g. img/surf-session.jpg
+        -->
+        <img src="img/surf-session.jpg" alt="Surfer riding a wave at sunset">
+        <figcaption>One perfect section is worth a lot of cold, messy ones.</figcaption>
+      </figure>
+    </section>
+
+    <!-- SECTION: YOUTUBE EMBED REQUIREMENT -->
+    <section class="card-section" id="video">
+      <h2>Session Inspiration – Surf Clip</h2>
+      <p>
+        Below is one of the greatest surf videos. 
+      </p>
+
+      <div class="video-wrapper">
+            <iframe
+            src="https://www.youtube.com/embed/8t4laZ1xFBM"
+            title="Surf video"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+            </iframe>
+        </div>
+    </section>
+
+    <!-- SECTION: TABLEAU EMBED REQUIREMENT -->
+    <section class="card-section" id="tableau">
+      <h2>Ocean Data – Tableau Visualization</h2>
+
+<!-- Tableau embed -->
+<div class="tableau-container">
+  <div class='tableauPlaceholder' id='viz1765344242837' style='position: relative'>
+    <noscript>
+      <a href='#'>
+        <img alt='Ocean Health'
+          src='https://public.tableau.com/static/images/Oc/OceanHealth_16951858845800/OceahHealth/1.png'
+          style='border: none' />
+      </a>
+    </noscript>
+
+    <object class='tableauViz' style='display:none;'>
+      <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+      <param name='embed_code_version' value='3' />
+      <param name='site_root' value='' />
+      <param name='name' value='OceanHealth_16951858845800/OceahHealth' />
+      <param name='tabs' value='no' />
+      <param name='toolbar' value='yes' />
+      <param name='static_image'
+        value='https://public.tableau.com/static/images/Oc/OceanHealth_16951858845800/OceahHealth/1.png' />
+      <param name='animate_transition' value='yes' />
+      <param name='display_static_image' value='yes' />
+      <param name='display_spinner' value='yes' />
+      <param name='display_overlay' value='yes' />
+      <param name='display_count' value='yes' />
+      <param name='language' value='en-US' />
+    </object>
+  </div>
+</div>
+
+        <script type='text/javascript'>
+        var divElement = document.getElementById('viz1765344242837');
+        var vizElement = divElement.getElementsByTagName('object')[0];
+
+        // Responsive width + reasonable height:
+        vizElement.style.width = '100%';
+        vizElement.style.height = '650px';  // adjust this number if you want it shorter or taller
+
+        var scriptElement = document.createElement('script');
+        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        </script>        <!-- Example placeholder text so you remember to embed -->
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER (DIV #3) -->
+  <footer class="site-footer">
+    <p>Surf Sessions Scratch Page &copy; 2025</p>
+    <p><a href="index.html">Back to Home</a> · <a href="app.html">Play the Number Guessing Game</a></p>
+  </footer>
+</body>
+</html>
